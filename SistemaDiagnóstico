@@ -1,0 +1,43 @@
+% Probabilidades
+0.4::str(dry).
+0.4::str(wet).
+0.2::str(snow_covered).
+
+0.3::flw(true).
+0.7::flw(false).
+
+0.9::b(true).
+0.1::b(false).
+
+0.8::k(true).
+0.2::k(false).
+
+% Probabilidades condicionais
+0.6::r(true) :- str(dry), flw(true).
+0.2::r(true) :- str(dry), flw(false).
+0.7::r(true) :- str(wet), flw(true).
+0.3::r(true) :- str(wet), flw(false).
+0.9::r(true) :- str(snow_covered), flw(true).
+0.5::r(true) :- str(snow_covered), flw(false).
+
+0.8::v(true) :- r(true).
+0.1::v(true) :- r(false).
+
+0.9::li(true) :- v(true), b(true), k(true).
+0.5::li(true) :- v(true), b(true), k(false).
+0.5::li(true) :- v(true), b(false), k(true).
+0.1::li(true) :- v(true), b(false), k(false).
+0.1::li(true) :- v(false), b(true), k(true).
+0.05::li(true) :- v(false), b(true), k(false).
+0.05::li(true) :- v(false), b(false), k(true).
+0.01::li(true) :- v(false), b(false), k(false).
+
+% Evidencias
+evidence(str(snow_covered), true).
+
+% Consultas
+query(v(true)).
+query(r(true)).
+query(li(true)).
+query(b(true)).
+query(k(true)).
